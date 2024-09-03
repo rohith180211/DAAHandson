@@ -6,77 +6,77 @@ import matplotlib.pyplot as plt
 
 
 # System Information
-def get_system_info():
-    system_info = {
-        "PC Name": platform.node(),
-        "Processor": platform.processor(),
-        "RAM": f"{round(psutil.virtual_memory().total / (1024 ** 3), 2)} GB",
-        "CPU Count": psutil.cpu_count(logical=True),
+def fetch_system_details():
+    sys_details = {
+        "Host Name": platform.node(),
+        "CPU": platform.processor(),
+        "Memory": f"{round(psutil.virtual_memory().total / (1024 ** 3), 2)} GB",
+        "Total Cores": psutil.cpu_count(logical=True),
         "Python Version": platform.python_version()
     }
-    return system_info
+    return sys_details
 
 
 # Insertion Sort
-def insertion_sort(arr):
-    n = len(arr)
-    for i in range(1, n):
-        key = arr[i]
-        j = i - 1
-        while j >= 0 and key < arr[j]:
-            arr[j + 1] = arr[j]
-            j -= 1
-        arr[j + 1] = key
-    return arr
+def perform_insertion_sort(data):
+    length = len(data)
+    for index in range(1, length):
+        current_value = data[index]
+        position = index - 1
+        while position >= 0 and current_value < data[position]:
+            data[position + 1] = data[position]
+            position -= 1
+        data[position + 1] = current_value
+    return data
 
 
 # Selection Sort
-def selection_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        min_index = i
-        for j in range(i + 1, n):
-            if arr[j] < arr[min_index]:
-                min_index = j
-        arr[i], arr[min_index] = arr[min_index], arr[i]
-    return arr
+def perform_selection_sort(data):
+    length = len(data)
+    for index in range(length):
+        minimum_index = index
+        for j in range(index + 1, length):
+            if data[j] < data[minimum_index]:
+                minimum_index = j
+        data[index], data[minimum_index] = data[minimum_index], data[index]
+    return data
 
 
 # Bubble Sort
-def bubble_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if arr[j] > arr[j + 1]:  # Corrected this line
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-    return arr
+def perform_bubble_sort(data):
+    length = len(data)
+    for index in range(length):
+        for j in range(0, length - index - 1):
+            if data[j] > data[j + 1]:
+                data[j], data[j + 1] = data[j + 1], data[j]
+    return data
 
 
 # Benchmarking
-def benchmark_sorting_algorithms():
-    input_sizes = [5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000]
-    algorithms = {
-        "Insertion Sort": insertion_sort,
-        "Selection Sort": selection_sort,
-        "Bubble Sort": bubble_sort
+def evaluate_sorting_algorithms():
+    test_sizes = [3, 15, 25, 75, 150, 250, 600, 1200, 2500, 6000]
+    sorting_algorithms = {
+        "Insertion Sort": perform_insertion_sort,
+        "Selection Sort": perform_selection_sort,
+        "Bubble Sort": perform_bubble_sort
     }
 
-    results = {alg: [] for alg in algorithms}
+    benchmark_results = {alg: [] for alg in sorting_algorithms}
 
-    for size in input_sizes:
-        arr = random.sample(range(size * 10), size)  # Generate a random array of the given size
-        for name, algorithm in algorithms.items():
+    for size in test_sizes:
+        random_data = random.sample(range(size * 10), size)  # Generate a random array of the given size
+        for algo_name, sorting_func in sorting_algorithms.items():
             start_time = time.time()
-            algorithm(arr.copy())  # Run the algorithm
-            elapsed_time = time.time() - start_time
-            results[name].append(elapsed_time)
+            sorting_func(random_data.copy())  # Run the sorting algorithm
+            time_taken = time.time() - start_time
+            benchmark_results[algo_name].append(time_taken)
 
     # Plotting the results
     plt.figure(figsize=(10, 6))
-    for name, times in results.items():
-        plt.plot(input_sizes, times, label=name, marker='o')
+    for algo_name, times in benchmark_results.items():
+        plt.plot(test_sizes, times, label=algo_name, marker='o')
 
-    plt.title("Sorting Algorithms Runtime Benchmark")
+    plt.title("Runtime Benchmark of Sorting Algorithms")
     plt.xlabel("Input Size (n)")
     plt.ylabel("Time (seconds)")
     plt.yscale("log")
@@ -86,13 +86,13 @@ def benchmark_sorting_algorithms():
 
 
 # Main execution
-if __name__ == "__main__":
-    # Display system information
-    system_info = get_system_info()
-    print("System Information:")
-    for key, value in system_info.items():
+if _name_ == "_main_":
+    # Display system details
+    system_details = fetch_system_details()
+    print("System Details:")
+    for key, value in system_details.items():
         print(f"{key}: {value}")
-    print("\nRunning benchmarks...\n")
+    print("\nExecuting benchmarks...\n")
 
     # Run the benchmark
-    benchmark_sorting_algorithms()
+    evaluate_sorting_algorithms()
