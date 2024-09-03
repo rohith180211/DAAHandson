@@ -1,32 +1,32 @@
-def selection_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        # Assume the minimum is the first element
-        min_index = i
-        # Test against elements after i to find the smallest
-        for j in range(i+1, n):
-            if arr[j] < arr[min_index]:
-                min_index = j
-        # Swap the found minimum element with the first element
-        arr[i], arr[min_index] = arr[min_index], arr[i]
-    return arr
+def selection_sort(data):
+    length = len(data)
+    for current_index in range(length):
+        # Assume the minimum is the current index
+        min_index = current_index
+        # Compare against the elements after the current index to find the smallest
+        for compare_index in range(current_index + 1, length):
+            if data[compare_index] < data[min_index]:
+                min_index = compare_index
+        # Swap the found minimum element with the element at the current index
+        data[current_index], data[min_index] = data[min_index], data[current_index]
+    return data
 
-# Test Case 1: Random array
-arr1 = [9, 17, 4, 87, 14]
-print("Sorted array 1:", selection_sort(arr1))
+# Test Case 1: List with random integers
+test_case_1 = [45, 3, 12, 7, 29]
+print("Sorted Test Case 1:", selection_sort(test_case_1))
 
-# Test Case 2: Already sorted array
-arr2 = [11, 12, 13, 14, 15]
-print("Sorted array 2:", selection_sort(arr2))
+# Test Case 2: List with elements already in ascending order
+test_case_2 = [1, 2, 3, 4, 5]
+print("Sorted Test Case 2:", selection_sort(test_case_2))
 
-# Test Case 3: Reverse sorted array
-arr3 = [15, 14, 13, 12, 11]
-print("Sorted array 3:", selection_sort(arr3))
+# Test Case 3: List with elements in descending order
+test_case_3 = [9, 8, 7, 6, 5]
+print("Sorted Test Case 3:", selection_sort(test_case_3))
 
-# Test Case 4: Array with all identical elements
-arr4 = [9, 9, 9, 9, 9]
-print("Sorted array 4:", selection_sort(arr4))
+# Test Case 4: List with all identical elements
+test_case_4 = [4, 4, 4, 4]
+print("Sorted Test Case 4:", selection_sort(test_case_4))
 
-# Test Case 5: Array with negative numbers
-arr5 = [-8, -1, 4, -9, 80]
-print("Sorted array 5:", selection_sort(arr5))
+# Test Case 5: List with a mix of positive and negative numbers
+test_case_5 = [-5, 2, -1, 7, 0]
+print("Sorted Test Case 5:", selection_sort(test_case_5))
