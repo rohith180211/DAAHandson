@@ -1,29 +1,29 @@
-def insertion_sort(arr):
-    for i in range(1, len(arr)):
-        key = arr[i]
-        j = i - 1
-        while j >= 0 and key < arr[j]:
-            arr[j + 1] = arr[j]
-            j -= 1
-        arr[j + 1] = key
-    return arr
+def insertion_sort(elements):
+    for index in range(1, len(elements)):
+        current_value = elements[index]
+        position = index - 1
+        while position >= 0 and current_value < elements[position]:
+            elements[position + 1] = elements[position]
+            position -= 1
+        elements[position + 1] = current_value
+    return elements
 
-# Test Case 1: Random array
-arr1 = [16, 11, 13, 51, 6]
-print("Sorted array 1:", insertion_sort(arr1))
+# Test Case 1: Random list of integers
+test_case_1 = [29, 1, 16, 8, 44]
+print("Sorted Test Case 1:", insertion_sort(test_case_1))
 
-# Test Case 2: Already sorted array
-arr2 = [11, 12, 13, 14, 15]
-print("Sorted array 2:", insertion_sort(arr2))
+# Test Case 2: List with all elements already in ascending order
+test_case_2 = [2, 4, 6, 8, 10]
+print("Sorted Test Case 2:", insertion_sort(test_case_2))
 
-# Test Case 3: Reverse sorted array
-arr3 = [15, 14, 13, 12, 11]
-print("Sorted array 3:", insertion_sort(arr3))
+# Test Case 3: List with elements in descending order
+test_case_3 = [30, 25, 20, 15, 10]
+print("Sorted Test Case 3:", insertion_sort(test_case_3))
 
-# Test Case 4: Array with all identical elements
-arr4 = [3, 3, 3, 3, 3]
-print("Sorted array 4:", insertion_sort(arr4))
+# Test Case 4: List with repeated values
+test_case_4 = [7, 7, 7, 7]
+print("Sorted Test Case 4:", insertion_sort(test_case_4))
 
-# Test Case 5: Array with negative numbers
-arr5 = [3, -10, 0, -4, 9]
-print("Sorted array 5:", insertion_sort(arr5))
+# Test Case 5: List with a mix of positive and negative numbers
+test_case_5 = [-5, 3, -1, 8, 0]
+print("Sorted Test Case 5:", insertion_sort(test_case_5))
