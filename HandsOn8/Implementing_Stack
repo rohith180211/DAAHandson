@@ -1,0 +1,258 @@
+class MyStack:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.items = [0] * capacity
+        self.index = -1
+
+    def is_empty(self):
+        return self.index == -1
+
+    def is_full(self):
+        return self.index == self.capacity - 1
+
+    def push(self, value):
+        if self.is_full():
+            raise Exception("Stack Overflow")
+        self.index += 1
+        self.items[self.index] = value
+
+    def pop(self):
+        if self.is_empty():
+            raise Exception("Stack Underflow")
+        value = self.items[self.index]
+        self.index -= 1
+        return value
+
+    def top(self):
+        if self.is_empty():
+            raise Exception("Stack is empty")
+        return self.items[self.index]
+
+
+class MyQueue:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.items = [0] * capacity
+        self.start = 0
+        self.end = -1
+        self.size = 0
+
+    def is_empty(self):
+        return self.size == 0
+   
+    def is_full(self):
+        return self.size == self.capacity
+
+    def enqueue(self, value):
+        if self.is_full():
+            raise Exception("Queue Overflow")
+        self.end = (self.end + 1) % self.capacity
+        self.items[self.end] = value
+        self.size += 1
+
+    def dequeue(self):
+        if self.is_empty():
+            raise Exception("Queue Underflow")
+        value = self.items[self.start]
+        self.start = (self.start + 1) % self.capacity
+        self.size -= 1
+        return value
+
+    def front(self):
+        if self.is_empty():
+            raise Exception("Queue is empty")
+        return self.items[self.start]
+
+    def show(self):
+        if self.is_empty():
+            return "Queue is empty"
+        result = []
+        for i in range(self.size):
+            result.append(self.items[(self.start + i) % self.capacity])
+        return result
+
+
+class ListNode:
+    def __init__(self, value):
+        self.value = value
+        self.next_node = None
+
+class SimpleLinkedList:
+    def __init__(self):
+        self.head_node = None
+
+    def add_to_start(self, value):
+        new_node = ListNode(value)
+        new_node.next_node = self.head_node
+        self.head_node = new_node
+
+    def remove_from_start(self):
+        if self.head_node is None:
+            raise Exception("List is empty")
+        self.head_node = self.head_node.next_node
+
+    def show(self):
+        current_node = self.head_node
+        result = []
+        while current_node:
+            result.append(current_node.value)
+            current_node = current_node.next_node
+        return result
+
+    def is_empty(self):
+        return self.head_node is None
+
+
+
+if __name__ == "__main__":
+    # MyStack
+    stack = MyStack(5)
+    stack.push(10)
+    stack.push(20)
+    print("Stack Top:", stack.top()) 
+    print("Stack Pop:", stack.pop())     
+
+
+    queue = MyQueue(5)
+    queue.enqueue(10)
+    queue.enqueue(20)
+    print("Queue Front:", queue.front())  
+    print("Queue Dequeue:", queue.dequeue())  
+    print("Queue Show:", queue.show())  
+
+
+    linked_list = SimpleLinkedList()
+    linked_list.add_to_start(10)
+    linked_list.add_to_start(20)
+    print("Linked List Show:", linked_list.show()) 
+    linked_list.remove_from_start()
+    print("Linked List Show after removal:", linked_list.show())  
+class MyStack:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.items = [0] * capacity
+        self.index = -1
+
+    def is_empty(self):
+        return self.index == -1
+
+    def is_full(self):
+        return self.index == self.capacity - 1
+
+    def push(self, value):
+        if self.is_full():
+            raise Exception("Stack Overflow")
+        self.index += 1
+        self.items[self.index] = value
+
+    def pop(self):
+        if self.is_empty():
+            raise Exception("Stack Underflow")
+        value = self.items[self.index]
+        self.index -= 1
+        return value
+
+    def top(self):
+        if self.is_empty():
+            raise Exception("Stack is empty")
+        return self.items[self.index]
+
+
+class MyQueue:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.items = [0] * capacity
+        self.start = 0
+        self.end = -1
+        self.size = 0
+
+    def is_empty(self):
+        return self.size == 0
+   
+    def is_full(self):
+        return self.size == self.capacity
+
+    def enqueue(self, value):
+        if self.is_full():
+            raise Exception("Queue Overflow")
+        self.end = (self.end + 1) % self.capacity
+        self.items[self.end] = value
+        self.size += 1
+
+    def dequeue(self):
+        if self.is_empty():
+            raise Exception("Queue Underflow")
+        value = self.items[self.start]
+        self.start = (self.start + 1) % self.capacity
+        self.size -= 1
+        return value
+
+    def front(self):
+        if self.is_empty():
+            raise Exception("Queue is empty")
+        return self.items[self.start]
+
+    def show(self):
+        if self.is_empty():
+            return "Queue is empty"
+        result = []
+        for i in range(self.size):
+            result.append(self.items[(self.start + i) % self.capacity])
+        return result
+
+
+class ListNode:
+    def __init__(self, value):
+        self.value = value
+        self.next_node = None
+
+class SimpleLinkedList:
+    def __init__(self):
+        self.head_node = None
+
+    def add_to_start(self, value):
+        new_node = ListNode(value)
+        new_node.next_node = self.head_node
+        self.head_node = new_node
+
+    def remove_from_start(self):
+        if self.head_node is None:
+            raise Exception("List is empty")
+        self.head_node = self.head_node.next_node
+
+    def show(self):
+        current_node = self.head_node
+        result = []
+        while current_node:
+            result.append(current_node.value)
+            current_node = current_node.next_node
+        return result
+
+    def is_empty(self):
+        return self.head_node is None
+
+
+
+if __name__ == "__main__":
+    # MyStack
+    stack = MyStack(5)
+    stack.push(10)
+    stack.push(20)
+    print("Stack Top:", stack.top()) 
+    print("Stack Pop:", stack.pop())     
+
+
+    queue = MyQueue(5)
+    queue.enqueue(10)
+    queue.enqueue(20)
+    print("Queue Front:", queue.front())  
+    print("Queue Dequeue:", queue.dequeue())  
+    print("Queue Show:", queue.show())  
+
+
+    linked_list = SimpleLinkedList()
+    linked_list.add_to_start(10)
+    linked_list.add_to_start(20)
+    print("Linked List Show:", linked_list.show()) 
+    linked_list.remove_from_start()
+    print("Linked List Show after removal:", linked_list.show())  
